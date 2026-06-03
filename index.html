@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberCode Academy | Dr Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts for Cyberpunk aesthetic -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="boot-text">INITIALIZING SYSTEM...</div>
+        <div class="boot-text">LOADING CORE MODULES... <span id="percent">0%</span></div>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+    </div>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- Main UI Wrapper -->
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <span class="highlight">&lt;/&gt;</span> CyberCode <span class="highlight">Academy</span>
+            </div>
+            <nav>
+                <button onclick="router('home')" class="nav-btn">Home</button>
+                <button onclick="router('html')" class="nav-btn">HTML</button>
+                <button onclick="router('css')" class="nav-btn">CSS</button>
+                <button onclick="router('js')" class="nav-btn">JS</button>
+                <button onclick="router('dashboard')" class="nav-btn">Dashboard</button>
+                <button onclick="router('resources')" class="nav-btn">Resources</button>
+            </nav>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search topics..." onkeyup="searchContent()">
+            </div>
+        </header>
+
+        <!-- Content Sections -->
+        <main id="main-content">
+            
+            <!-- Home Section -->
+            <section id="home" class="active-section">
+                <div class="hero">
+                    <h1>Welcome to <span class="green-text">CyberCode Academy</span></h1>
+                    <p class="subtitle">The ultimate cybersecurity-themed learning platform.</p>
+                    <p>Created by <strong>Dr Games</strong> (Class 9 Bronze, Bronze Radiant Secondary School)</p>
+                    
+                    <div class="cta-container">
+                        <button class="cyber-btn" onclick="router('html')">Start HTML</button>
+                        <button class="cyber-btn" onclick="router('dashboard')">View Progress</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-preview glass-panel">
+                    <h2>Your Status</h2>
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <h3 id="total-progress">0%</h3>
+                            <p>Overall Progress</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="quizzes-taken">0</h3>
+                            <p>Quizzes Completed</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3 id="streak-days">0</h3>
+                            <p>Day Streak</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote-section">
+                    <p>"Learning to code is learning to create. Every expert programmer started as a beginner."</p>
+                    <span>- Dr Games</span>
+                </div>
+            </section>
+
+            <!-- Course Sections (Dynamically Filled) -->
+            <section id="html-course" class="hidden-section">
+                <div class="course-header">
+                    <h1>HTML Mastery</h1>
+                    <div class="progress-bar-container"><div class="progress-fill" id="html-progress-bar" style="width:0%"></div></div>
+                </div>
+                <div id="html-content" class="lesson-container">
+                    <!-- Lessons injected via JS -->
+                </div>
+            </section>
+
+            <section id="css-course" class="hidden-section">
+                <div class="course-header">
+                    <h1>CSS Mastery</h1>
+                    <div class="progress-bar-container"><div class="progress-fill" id="css-progress-bar" style="width:0%"></div></div>
+                </div>
+                <div id="css-content" class="lesson-container"></div>
+            </section>
+
+            <section id="js-course" class="hidden-section">
+                <div class="course-header">
+                    <h1>JavaScript Mastery</h1>
+                    <div class="progress-bar-container"><div class="progress-fill" id="js-progress-bar" style="width:0%"></div></div>
+                </div>
+                <div id="js-content" class="lesson-container"></div>
+            </section>
+
+            <!-- Quiz Section -->
+            <section id="quiz-section" class="hidden-section">
+                <div class="glass-panel quiz-container">
+                    <h2 id="quiz-title">Quiz Mode</h2>
+                    <div id="question-area"></div>
+                    <div id="options-area" class="options-grid"></div>
+                    <button id="next-btn" class="cyber-btn hidden" onclick="nextQuestion()">Next Question</button>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="hidden-section">
+                <h1>Student Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="glass-panel">
+                        <h3>Badges</h3>
+                        <div class="badges-container" id="badges-list">
+                            <!-- Badges injected JS -->
+                            <div class="badge locked">? ? ?</div>
+                        </div>
+                    </div>
+                    <div class="glass-panel">
+                        <h3>Certificates</h3>
+                        <button class="cyber-btn" onclick="generateCertificate()">Generate Certificate</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resources Section -->
+            <section id="resources" class="hidden-section">
+                <h1>Resources</h1>
+                <div class="resource-grid">
+                    <div class="glass-panel">
+                        <h3>Downloadable Notes</h3>
+                        <p>coming soon...</p>
+                    </div>
+                    <div class="glass-panel">
+                        <h3>Cheat Sheets</h3>
+                        <p>coming soon...</p>
+                    </div>
+                    <div class="glass-panel">
+                        <h3>Practice Projects</h3>
+                        <p>coming soon...</p>
+                    </div>
+                </div>
+                <div class="contact-section glass-panel">
+                    <h3>Contact Creator</h3>
+                    <p>Discord: Dr Games</p>
+                    <button class="cyber-btn">Send Feedback</button>
+                </div>
+            </section>
+
+            <!-- Certificate View (Hidden by default) -->
+            <section id="certificate-view" class="hidden-section center-content">
+                <div class="certificate-paper" id="cert-card">
+                    <div class="cert-border">
+                        <h1>CERTIFICATE OF COMPLETION</h1>
+                        <p>This is to certify that</p>
+                        <h2 id="cert-name-display">Student Name</h2>
+                        <p>has successfully completed the Web Development Course</p>
+                        <div class="cert-details">
+                            <span>CyberCode Academy</span>
+                            <span id="cert-date">Date</span>
+                        </div>
+                        <div class="sig">Dr Games</div>
+                    </div>
+                </div>
+                <button class="cyber-btn" onclick="window.print()">Download/Print</button>
+                <button class="cyber-btn" onclick="router('dashboard')">Back</button>
+            </section>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2023 CyberCode Academy | Created by Dr Games | Class 9 Bronze</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
