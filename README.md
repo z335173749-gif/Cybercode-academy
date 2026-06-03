@@ -12,8 +12,8 @@ Discord: Dr Games
 ---
 
 ## 🎓 Student Information
-Class: 9 Bronze  
-School: Bronze Radiant Secondary School  
+Class: 9 
+School: Radiant Secondary School  
 
 ---
 
